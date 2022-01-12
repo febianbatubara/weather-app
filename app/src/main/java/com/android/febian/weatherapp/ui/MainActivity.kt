@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.android.febian.weatherapp.R
 import com.android.febian.weatherapp.data.source.local.entity.WeatherItemEntity
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
         setupAlertDialog()
+        setupSwipeRefresh()
 
         viewModel.getWeather("Jakarta,ID").observe(this, weatherObserver)
     }
@@ -38,6 +40,17 @@ class MainActivity : AppCompatActivity() {
             .setCancelable(false)
             .setView(R.layout.custom_progress_dialog)
             .create()
+    }
+
+    private fun setupSwipeRefresh() {
+        binding.swipeRefreshLayout.setColorSchemeColors(
+            ContextCompat.getColor(this, R.color.purple_700)
+        )
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = false
+            viewModel.getWeather("Jakarta,ID").observe(this, weatherObserver)
+        }
     }
 
     private val weatherObserver: Observer<Resource<WeatherItemEntity>> =

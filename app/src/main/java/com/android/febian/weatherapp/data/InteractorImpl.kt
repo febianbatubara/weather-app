@@ -27,7 +27,7 @@ class InteractorImpl @Inject constructor(
                 localRepository.getWeather()
 
             override fun shouldFetch(data: WeatherItemEntity?): Boolean =
-                data == null
+                data == null || data.updatedAt != getCurrentDate()
 
             public override fun createCall(): LiveData<ApiResponse<WeatherApiResponse>> =
                 remoteRepository.getWeather(city)
