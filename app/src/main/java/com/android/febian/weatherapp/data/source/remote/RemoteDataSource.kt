@@ -8,5 +8,5 @@ interface RemoteDataSource {
 
     suspend fun getWeather(
         city: String
-    ): LiveData<WeatherApiResponse>
+    ): LiveData<ApiResponse<WeatherApiResponse>>
 }
