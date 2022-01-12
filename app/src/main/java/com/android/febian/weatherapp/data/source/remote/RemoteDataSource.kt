@@ -6,7 +6,7 @@ import com.android.febian.weatherapp.data.source.remote.vo.ApiResponse
 
 interface RemoteDataSource {
 
-    suspend fun getWeather(
+    fun getWeather(
         city: String
     ): LiveData<ApiResponse<WeatherApiResponse>>
 }

@@ -1,5 +1,5 @@
 package com.android.febian.weatherapp.data.source.local.entity
 
 data class CloudsEntity(
-    val all: Int
+    val all: Int? = null
 )

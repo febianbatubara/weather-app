@@ -16,7 +16,7 @@ class RemoteRepository @Inject constructor(
     private val endpoint: Endpoint
 ) : RemoteDataSource {
 
-    override suspend fun getWeather(city: String): LiveData<ApiResponse<WeatherApiResponse>> {
+    override fun getWeather(city: String): LiveData<ApiResponse<WeatherApiResponse>> {
         val weatherResult = MutableLiveData<ApiResponse<WeatherApiResponse>>()
         CoroutineScope(Dispatchers.IO).launch {
             try {
