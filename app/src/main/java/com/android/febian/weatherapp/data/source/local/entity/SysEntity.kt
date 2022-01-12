@@ -1,6 +1,7 @@
 package com.android.febian.weatherapp.data.source.local.entity
 
 data class SysEntity(
-    val speed: Float? = null,
-    val deg: Int? = null
+    val country: String? = null,
+    val sunrise: String? = null,
+    val sunset: String? = null
 )

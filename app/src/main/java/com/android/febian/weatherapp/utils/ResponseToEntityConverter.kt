@@ -8,14 +8,15 @@ object ResponseToEntityConverter {
     fun getEntity(data: WeatherApiResponse): WeatherItemEntity {
         with(data) {
             val weatherEntity = WeatherEntity(
-                weather[0].id,
-                weather[0].main,
-                weather[0].description,
+                weather?.get(0)?.main,
+                weather?.get(0)?.description,
             )
             val mainEntity = MainEntity(
                 main?.temp,
                 main?.temp_min,
-                main?.temp_max
+                main?.temp_max,
+                main?.pressure,
+                main?.humidity
             )
             val windEntity = WindEntity(
                 wind?.speed,
@@ -25,8 +26,9 @@ object ResponseToEntityConverter {
                 clouds?.all
             )
             val sysEntity = SysEntity(
-                sys?.speed,
-                sys?.deg,
+                sys?.country,
+                sys?.sunrise,
+                sys?.sunset
             )
             return WeatherItemEntity(
                 id,

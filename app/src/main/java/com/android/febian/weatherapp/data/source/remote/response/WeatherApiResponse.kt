@@ -3,7 +3,7 @@ package com.android.febian.weatherapp.data.source.remote.response
 import com.squareup.moshi.Json
 
 data class WeatherApiResponse(
-    @field:Json(name = "weather") var weather: ArrayList<WeatherResponse> = arrayListOf(),
+    @field:Json(name = "weather") var weather: List<WeatherResponse>? = null,
     @field:Json(name = "main") var main: MainResponse? = null,
     @field:Json(name = "visibility") var visibility: Int? = null,
     @field:Json(name = "wind") var wind: WindResponse? = null,

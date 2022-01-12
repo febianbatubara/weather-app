@@ -7,4 +7,9 @@
     <string name="humidity">Humidity</string>
     <string name="created_by">Created by</string>
     <string name="febian">Febian</string>
+    <string name="loading_please_wait">Loading, please wait..</string>
+    <string name="city_and_country">%1$s, %2$s</string>
+    <string name="temp">%1$s"\u2103"</string>
+    <string name="min_temp">Min Temp: %1$s"\u2103"</string>
+    <string name="max_temp">Max Temp: %1$s"\u2103"</string>
 </resources>

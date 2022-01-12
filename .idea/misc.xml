@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Febian/Desktop/weather-app/app/src/main/res/drawable/bg_purple_gradient.xml" value="0.2203125" />
-        <entry key="..\:/Users/Febian/Desktop/weather-app/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/Users/Febian/Desktop/weather-app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2203125" />
+        <entry key="..\:/Users/Febian/Desktop/weather-app/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/Febian/Desktop/weather-app/app/src/main/res/layout/custom_progress_dialog.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

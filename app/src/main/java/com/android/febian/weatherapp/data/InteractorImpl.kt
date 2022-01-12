@@ -17,7 +17,7 @@ class InteractorImpl @Inject constructor(
     private val appExecutors: AppExecutors
 ) : Interactor {
 
-    override suspend fun getWeather(city: String): LiveData<Resource<WeatherItemEntity>> {
+    override fun getWeather(city: String): LiveData<Resource<WeatherItemEntity>> {
         return object :
             NetworkBoundResource<WeatherItemEntity, WeatherApiResponse>(appExecutors) {
             public override fun loadFromDB(): LiveData<WeatherItemEntity> =

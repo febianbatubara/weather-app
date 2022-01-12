@@ -6,7 +6,7 @@ import com.android.febian.weatherapp.vo.Resource
 
 interface Interactor {
 
-    suspend fun getWeather(
+    fun getWeather(
         city: String
     ): LiveData<Resource<WeatherItemEntity>>
 }
