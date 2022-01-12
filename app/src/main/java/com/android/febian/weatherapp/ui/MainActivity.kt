@@ -1,5 +1,6 @@
 package com.android.febian.weatherapp.ui
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.Toast
@@ -12,6 +13,8 @@ import com.android.febian.weatherapp.databinding.ActivityMainBinding
 import com.android.febian.weatherapp.vo.Resource
 import com.android.febian.weatherapp.vo.Status
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -24,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         supportActionBar?.hide()
         setupAlertDialog()
 
@@ -53,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                         loadingDialog.dismiss()
                         Toast.makeText(
                             this,
-                            "Error",
+                            "Network Error",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -64,16 +66,30 @@ class MainActivity : AppCompatActivity() {
     private fun showWeatherData(weather: WeatherItemEntity) {
         with(binding) {
             tvTown.text = getString(R.string.city_and_country, weather.name, weather.sys?.country)
-            tvUpdateTime.text = "Updated at: ---"
+            tvUpdateTime.text = getString(R.string.updated_at, weather.updatedAt)
             tvWeatherType.text = weather.weather?.main ?: ""
-            tvTemperature.text = getString(R.string.temp, weather.main?.temp.toString())
-            tvMinTemperature.text = getString(R.string.min_temp, weather.main?.temp_min.toString())
-            tvMaxTemperature.text = getString(R.string.max_temp, weather.main?.temp_max.toString())
-            tvSunrise.text = weather.sys?.sunrise.toString()
-            tvSunset.text = weather.sys?.sunset.toString()
+            tvTemperature.text = getString(R.string.temp,
+                weather.main?.temp?.let { getCelsius(it) })
+            tvMinTemperature.text = getString(R.string.min_temp,
+                weather.main?.temp_min?.let { getCelsius(it) })
+            tvMaxTemperature.text = getString(R.string.max_temp,
+                weather.main?.temp_max?.let { getCelsius(it) })
+            tvSunrise.text = parseUnixTime(weather.sys?.sunrise)
+            tvSunset.text = parseUnixTime(weather.sys?.sunset)
             tvWind.text = weather.wind?.speed.toString()
             tvPressure.text = weather.main?.pressure.toString()
             tvHumidity.text = weather.main?.humidity.toString()
         }
+    }
+
+    private fun getCelsius(kelvinTemp: Float): String {
+        return kelvinTemp.minus(273.15).toInt().toString()
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun parseUnixTime(time: String?): String {
+        val sdf = SimpleDateFormat("HH:mm a")
+        val date = Date(time!!.toLong() * 1000L)
+        return sdf.format(date)
     }
 }

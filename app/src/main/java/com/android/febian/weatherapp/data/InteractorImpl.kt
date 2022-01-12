@@ -1,5 +1,6 @@
 package com.android.febian.weatherapp.data
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import com.android.febian.weatherapp.data.source.local.LocalRepository
 import com.android.febian.weatherapp.data.source.local.entity.WeatherItemEntity
@@ -9,6 +10,8 @@ import com.android.febian.weatherapp.data.source.remote.vo.ApiResponse
 import com.android.febian.weatherapp.utils.AppExecutors
 import com.android.febian.weatherapp.utils.ResponseToEntityConverter
 import com.android.febian.weatherapp.vo.Resource
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class InteractorImpl @Inject constructor(
@@ -31,8 +34,16 @@ class InteractorImpl @Inject constructor(
 
             public override fun saveCallResult(data: WeatherApiResponse) {
                 val weatherEntity = ResponseToEntityConverter.getEntity(data)
+                weatherEntity.updatedAt = getCurrentDate()
                 localRepository.insertWeather(weatherEntity)
             }
         }.asLiveData()
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun getCurrentDate(): String {
+        val today = Date()
+        val format = SimpleDateFormat("dd/MM/yyy hh:mm a")
+        return format.format(today)
     }
 }

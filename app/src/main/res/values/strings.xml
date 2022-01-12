@@ -12,4 +12,5 @@
     <string name="temp">%1$s"\u2103"</string>
     <string name="min_temp">Min Temp: %1$s"\u2103"</string>
     <string name="max_temp">Max Temp: %1$s"\u2103"</string>
+    <string name="updated_at">Updated at: %1$s</string>
 </resources>

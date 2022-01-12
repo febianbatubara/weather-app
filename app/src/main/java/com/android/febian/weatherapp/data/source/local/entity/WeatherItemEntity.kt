@@ -35,5 +35,8 @@ data class WeatherItemEntity(
     var name: String? = null,
 
     @ColumnInfo(name = "cod")
-    var cod: Int? = null
+    var cod: Int? = null,
+
+    @ColumnInfo(name = "updatedAt")
+    var updatedAt: String? = null
 )
